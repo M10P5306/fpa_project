@@ -8,10 +8,13 @@ function Favorites({ favoriteDrinks = [], setFavoriteDrinks, setDrink }) {
   };
 
   const removeDrink = (idDrink) => {
+    const drinkToRemove = favoriteDrinks.find(drink => drink.idDrink === idDrink);
     const updatedDrinks = favoriteDrinks.filter(drink => drink.idDrink !== idDrink);
     localStorage.setItem('drinkList', JSON.stringify(updatedDrinks));
     setFavoriteDrinks(updatedDrinks);
-    toast.info('Drink removed from favorites', { position: 'top-center' });
+    toast.info(`${drinkToRemove?.strDrink || 'Drink'} removed from favorites`, {
+    position: 'top-center'
+  });
   };
 
   return (
