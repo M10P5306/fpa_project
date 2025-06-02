@@ -99,8 +99,6 @@ function NavScrollExample({setDrink}) {
     return (
         <Navbar expand="lg" className="bg-body-tertiary">
             <Container fluid>
-                <Navbar.Brand><img
-                    src={"https://static.vecteezy.com/system/resources/thumbnails/055/064/681/small/holiday-beach-cocktail-with-small-umbrella-and-straw-isolate-on-transparent-background-png.png"} alt={"bild"}/></Navbar.Brand>
                 <Navbar.Toggle aria-controls="navbarScroll"/>
                 <Navbar.Collapse id="navbarScroll">
                     <Nav
