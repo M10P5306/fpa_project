@@ -29,7 +29,7 @@ function App() {
             <main>
                 <Routes>
                     <Route path="/" element={<Navigate to="/favorites" replace />} />
-                    <Route path="/favorites" element={<Favorites />} />
+                    <Route path="/favorites" element={<Favorites favoriteDrinks={favoriteDrinks} setFavoriteDrinks={setFavoriteDrinks} setDrink={setDrink}/>} />
                     <Route path="/wheel" element={<SpinningWheel favoriteDrinks={favoriteDrinks} setDrink={setDrink}/>} />
                 </Routes>
             </main>
