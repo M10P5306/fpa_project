@@ -1,9 +1,10 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Wheel } from 'react-custom-roulette'
 
 function SpinningWheel({ favoriteDrinks = [], setDrink }) {
     const [mustSpin, setMustSpin] = useState(false)
     const [prizeNumber, setPrizeNumber] = useState(0)
+    const [backGroundColors, setBackGroundColors] = useState([]);
 
     const data = favoriteDrinks.map(drink => ({ option: drink.strDrink }))
 
@@ -23,7 +24,9 @@ function SpinningWheel({ favoriteDrinks = [], setDrink }) {
         return color
     }
 
-    const backGroundColors = favoriteDrinks.map(() => (generateRandomColor()))
+    useEffect(() => {
+        setBackGroundColors(favoriteDrinks.map(() => (generateRandomColor())));
+    }, [favoriteDrinks]);
 
     return (
         <>
