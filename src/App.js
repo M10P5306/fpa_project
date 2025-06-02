@@ -22,6 +22,7 @@ function App() {
     }
 
     return (
+        <div>
         <BrowserRouter>
             <Header/>
             <Navbaren setDrink={setDrink} />
@@ -34,6 +35,7 @@ function App() {
                 </Routes>
             </main>
         </BrowserRouter>
+        </div>
     );
 }
 

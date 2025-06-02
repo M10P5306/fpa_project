@@ -25,3 +25,9 @@
     }
 }
 
+.favorited {
+  background-color: gray;
+  border-color: gray;
+  cursor: not-allowed;
+}
+

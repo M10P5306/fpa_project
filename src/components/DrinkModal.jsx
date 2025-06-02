@@ -2,22 +2,29 @@ import "./DrinkModal.css"
 import {Modal, Button} from "react-bootstrap";
 import {useEffect, useState} from "react";
 
-
 function DrinkModal({currentDrink, onClose, setFavoriteDrinks}) {
 
     const [show, setShow] = useState(false);
     const [ingredients, setIngredients] = useState([]);
+    const [isFavorite, setIsFavorite] = useState(false);
 
     useEffect( () => {
             if (currentDrink) {
                 setShow(true);
                 get_ingredients();
+                checkIfFavorite();
             }
             else {
                 setShow(false);
             }
         }, [currentDrink]
     );
+
+    const checkIfFavorite = () => {
+        const savedDrinks = JSON.parse(localStorage.getItem("drinkList")) || [];
+        const found = savedDrinks.some(drink => drink.idDrink === currentDrink.idDrink);
+        setIsFavorite(found);
+    };
 
     const makeFavorite = () => {
         let savedDrinks = localStorage.getItem("drinkList");
@@ -44,6 +51,7 @@ function DrinkModal({currentDrink, onClose, setFavoriteDrinks}) {
             const favoriteDrinks = JSON.parse(localStorage.getItem("drinkList")) || [];
             setFavoriteDrinks(favoriteDrinks);
         }
+        setIsFavorite(true);
     }
 
     const handleClose = () => {
@@ -77,6 +85,7 @@ function DrinkModal({currentDrink, onClose, setFavoriteDrinks}) {
     if (!currentDrink) return null;
 
     return (
+        <div>
         <Modal show={show} onHide={handleClose} size="lg" centered className="drinkModal">
             <Modal.Header closeButton>
                 <Modal.Title>{currentDrink.strDrink}</Modal.Title>
@@ -90,9 +99,13 @@ function DrinkModal({currentDrink, onClose, setFavoriteDrinks}) {
                 <h5>Instructions</h5>
                 <p>{currentDrink.strInstructions}</p>
             </Modal.Body>
-            <Modal.Footer><Button onClick={makeFavorite} className="favoriteButton">Favorite</Button>
+            <Modal.Footer>
+                <Button onClick={makeFavorite} className="favoriteButton" disabled={isFavorite}>
+                {isFavorite ? "Favorited" : "Favorite"}
+                </Button>
                 <Button onClick={handleClose} className="closeButton">Close</Button></Modal.Footer>
         </Modal>
+        </div>
     )
 }
 

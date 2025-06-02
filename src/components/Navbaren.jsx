@@ -159,7 +159,7 @@ function NavScrollExample({setDrink}) {
                         <input className="form-check-input" type="radio" name="flexRadio" id="flexRadioDefault2" value="ingredient" checked={searchType === "ingredient"}
                                onChange={(e) => setSearchType(e.target.value)}/>
                         <label className="form-check-label" htmlFor="flexRadioDefault2">
-                            Ingredent
+                            Ingredient
                         </label>
                     </div>
                 </Navbar.Collapse>
