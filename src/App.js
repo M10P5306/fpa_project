@@ -24,13 +24,13 @@ function App() {
     return (
         <BrowserRouter>
             <Header/>
-            <Navbaren  />
+            <Navbaren setDrink={setDrink} />
             <DrinkModal currentDrink={drink} onClose={closeModal} setFavoriteDrinks={setFavoriteDrinks}/>
             <main>
                 <Routes>
                     <Route path="/" element={<Navigate to="/favorites" replace />} />
                     <Route path="/favorites" element={<Favorites />} />
-                    <Route path="/wheel" element={<SpinningWheel />} />
+                    <Route path="/wheel" element={<SpinningWheel favoriteDrinks={favoriteDrinks} setDrink={setDrink}/>} />
                 </Routes>
             </main>
         </BrowserRouter>
