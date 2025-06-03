@@ -19,35 +19,50 @@ function Favorites({ favoriteDrinks = [], setFavoriteDrinks, setDrink }) {
     toast.info(`${drinkToRemove.strDrink} removed from favorites`, { position: 'top-center' });
   };
 
+  const sortAlphabetically = () => {
+    const sorted = [...favoriteDrinks].sort((a, b) =>
+      a.strDrink.localeCompare(b.strDrink)
+    );
+    setFavoriteDrinks(sorted);
+    sessionStorage.setItem("sortedDrinkList", JSON.stringify(sorted));
+  };
+
   return (
     <>
       <div className="container py-4">
-        <h2 className="mb-4">Your Favorite Drinks</h2>
-        <Form>
-          <Form.Control
-            type="search"
-            placeholder="Search drink..."
-            className="mb-4"
-            aria-label="Search"
-            value={filter}
-            onChange={e => setFilter(e.target.value)}
-          />
-        </Form>
-        <div className="d-flex justify-content-between align-items-center mb-4">
-          <h2 className="text-white mb-0">Your Favorite Drinks</h2>
-          <button className="btn btn-primary" onClick={sortAlphabetically}>
-            Sort Alphabetically
-          </button>
+        <h2 className="mb-4 text-white">Your Favorite Drinks</h2>
+
+        <div className="row align-items-center mb-4">
+          <div className="col-6">
+            <Form>
+              <Form.Control
+                type="search"
+                placeholder="Search drink..."
+                aria-label="Search"
+                value={filter}
+                onChange={e => setFilter(e.target.value)}
+              />
+            </Form>
+          </div>
+
+          <div className="col-6 d-flex justify-content-end">
+            <button className="btn btn-primary" onClick={sortAlphabetically}>
+              Sort Alphabetically
+            </button>
+          </div>
         </div>
+
         <div className="row row-cols-1 row-cols-md-2 row-cols-xl-4 g-4">
-          {favoriteDrinks.filter((drink) => drink.strDrink.toLowerCase().includes(filter.toLowerCase())).map(drink => (
-            <DrinkCard
-              key={drink.idDrink}
-              title={drink.strDrink}
-              image={drink.strDrinkThumb}
-              onRemove={() => removeDrink(drink.idDrink)}
-              onClick={() => displayDrink(drink)}
-            />
+          {favoriteDrinks
+            .filter((drink) => drink.strDrink.toLowerCase().includes(filter.toLowerCase()))
+            .map(drink => (
+              <DrinkCard
+                key={drink.idDrink}
+                title={drink.strDrink}
+                image={drink.strDrinkThumb}
+                onRemove={() => removeDrink(drink.idDrink)}
+                onClick={() => displayDrink(drink)}
+              />
           ))}
         </div>
       </div>

@@ -12,9 +12,14 @@ function App() {
     const [drink, setDrink] = useState("")
     const [favoriteDrinks,setFavoriteDrinks] = useState([]);
 
-    useEffect(()=>{
-        const favoriteDrinks = JSON.parse(localStorage.getItem("drinkList")) || [];
-        setFavoriteDrinks(favoriteDrinks);
+    useEffect(() => {
+        const sessionData = JSON.parse(sessionStorage.getItem("sortedDrinkList"));
+        if (sessionData) {
+            setFavoriteDrinks(sessionData);
+        } else {
+            const favoriteDrinks = JSON.parse(localStorage.getItem("drinkList")) || [];
+            setFavoriteDrinks(favoriteDrinks);
+        }
     }, []);
 
     const closeModal = () => {
