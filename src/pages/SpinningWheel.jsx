@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react'
+import { Button } from 'react-bootstrap';
 import { Wheel } from 'react-custom-roulette'
+import "./SpinningWheel.css"
 
 function SpinningWheel({ favoriteDrinks = [], setDrink }) {
     const [mustSpin, setMustSpin] = useState(false)
@@ -31,7 +33,7 @@ function SpinningWheel({ favoriteDrinks = [], setDrink }) {
     return (
         <>
             {data.length > 0 ? (
-                <>
+                <div id="wheel-field" className="mt-3">
                     <Wheel
                         mustStartSpinning={mustSpin}
                         prizeNumber={prizeNumber}
@@ -43,10 +45,10 @@ function SpinningWheel({ favoriteDrinks = [], setDrink }) {
                             setDrink(favoriteDrinks[prizeNumber])
                         }}
                     />
-                    <button onClick={winner} disabled={mustSpin} style={{ marginTop: 20 }}>
-                        Snurra hjulet!
-                    </button>
-                </>
+                    <div className="d-flex justify-content-center mt-3">
+                        <Button onClick={winner} disabled={mustSpin}>Snurra hjulet!</Button>
+                    </div>
+                </div>
             ) : (
                 <p>🚫 Inga favoriter tillgängliga för snurrning.</p>
             )}
