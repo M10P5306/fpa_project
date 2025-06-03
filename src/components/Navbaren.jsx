@@ -2,6 +2,7 @@ import Container from 'react-bootstrap/Container';
 import Form from 'react-bootstrap/Form';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
+import './Navbaren.css'
 import {useEffect, useState} from "react";
 import ListGroup from 'react-bootstrap/ListGroup';
 
@@ -97,74 +98,96 @@ function NavScrollExample({setDrink}) {
     }
 
     return (
-        <Navbar expand="lg" className="bg-body-tertiary">
+            <Navbar expand="lg" className="darker-navbar">
             <Container fluid>
-                <Navbar.Toggle aria-controls="navbarScroll"/>
+                <Navbar.Toggle aria-controls="navbarScroll" />
                 <Navbar.Collapse id="navbarScroll">
-                    <Nav
-                        className="me-auto my-2 my-lg-0"
-                        style={{maxHeight: '100px'}}
-                        navbarScroll
-                    >
-                        <Nav.Link href="/favorites">Favorites</Nav.Link>
-                        <Nav.Link href="/Wheel">Spin the Wheel</Nav.Link>
-                        <Nav.Link href="#" onClick={(e) => {
-                            e.preventDefault();
-                            getRandom();
-                        }}>Random</Nav.Link>
+                <div className="row w-100 align-items-center">
+                    <div className="col"></div>
+
+                    <div className="col d-flex justify-content-center">
+                    <Nav className="d-flex justify-content-evenly g-6" navbarScroll>
+                        <Nav.Link href="/favorites" className='nav-link-bordered mx-2'>Favorites</Nav.Link>
+                        <Nav.Link href="/Wheel" className='nav-link-bordered mx-2'>Spin the Wheel</Nav.Link>
+                        <Nav.Link href="#" className='nav-link-bordered mx-2' onClick={(e) => {
+                        e.preventDefault();
+                        getRandom();
+                        }}>
+                        I feel lucky!
+                        </Nav.Link>
                     </Nav>
-                    <Form className="d-flex">
+                    </div>
+
+                    <div className="col d-flex justify-content-end align-items-center gap-3">
+                    <Form className="d-flex position-relative">
                         <Form.Control
-                            type="search"
-                            placeholder="Search"
-                            className="me-2"
-                            aria-label="Search"
-                            value={search}
-                            onChange={e => setSearch(e.target.value)}
+                        type="search"
+                        placeholder="Search"
+                        className="me-2"
+                        aria-label="Search"
+                        value={search}
+                        onChange={e => setSearch(e.target.value)}
                         />
 
                         {displayDropdown && results.length > 0 && (
-                            <ListGroup
-                                style={{
-                                    position: 'absolute',
-                                    top: '100%',
-                                    zIndex: 1000,
-                                    width: 'auto',
-                                    maxHeight: '300px',
-                                    overflowY: 'auto',
-                                    overflowX: 'hidden',
-                                }}
+                        <ListGroup
+                            style={{
+                            position: 'absolute',
+                            top: '100%',
+                            zIndex: 1000,
+                            width: '100%',
+                            maxHeight: '300px',
+                            overflowY: 'auto',
+                            overflowX: 'hidden',
+                            }}
+                        >
+                            {results.map((drink) => (
+                            <ListGroup.Item
+                                key={drink.idDrink}
+                                action
+                                onClick={(e) => handleClick(drink, e)}
                             >
-                                {results.map((drink) => (
-                                    <ListGroup.Item
-                                        key={drink.idDrink}
-                                        action
-                                        onClick={(e) => handleClick(drink, e)}
-                                    >
-                                        {drink.strDrink}
-                                    </ListGroup.Item>
-                                ))}
-                            </ListGroup>
+                                {drink.strDrink}
+                            </ListGroup.Item>
+                            ))}
+                        </ListGroup>
                         )}
-
                     </Form>
-                    <div className="form-check">
-                        <input className="form-check-input" type="radio" name="flexRadio" id="flexRadioDefault1" value="drink" checked={searchType === "drink"}
-                               onChange={(e) => setSearchType(e.target.value)}/>
+
+                    <div className="form-check mb-0">
+                        <input
+                        className="form-check-input"
+                        type="radio"
+                        name="flexRadio"
+                        id="flexRadioDefault1"
+                        value="drink"
+                        checked={searchType === "drink"}
+                        onChange={(e) => setSearchType(e.target.value)}
+                        />
                         <label className="form-check-label" htmlFor="flexRadioDefault1">
-                            Drink
+                        Drink
                         </label>
                     </div>
-                    <div className="form-check">
-                        <input className="form-check-input" type="radio" name="flexRadio" id="flexRadioDefault2" value="ingredient" checked={searchType === "ingredient"}
-                               onChange={(e) => setSearchType(e.target.value)}/>
+
+                    <div className="form-check mb-0">
+                        <input
+                        className="form-check-input"
+                        type="radio"
+                        name="flexRadio"
+                        id="flexRadioDefault2"
+                        value="ingredient"
+                        checked={searchType === "ingredient"}
+                        onChange={(e) => setSearchType(e.target.value)}
+                        />
                         <label className="form-check-label" htmlFor="flexRadioDefault2">
-                            Ingredient
+                        Ingredient
                         </label>
                     </div>
+                    </div>
+                </div>
                 </Navbar.Collapse>
             </Container>
-        </Navbar>
+            </Navbar>
     );
 }
 

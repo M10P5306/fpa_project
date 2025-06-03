@@ -33,6 +33,12 @@ function Favorites({ favoriteDrinks = [], setFavoriteDrinks, setDrink }) {
             onChange={e => setFilter(e.target.value)}
           />
         </Form>
+        <div className="d-flex justify-content-between align-items-center mb-4">
+          <h2 className="text-white mb-0">Your Favorite Drinks</h2>
+          <button className="btn btn-primary" onClick={sortAlphabetically}>
+            Sort Alphabetically
+          </button>
+        </div>
         <div className="row row-cols-1 row-cols-md-2 row-cols-xl-4 g-4">
           {favoriteDrinks.filter((drink) => drink.strDrink.toLowerCase().includes(filter.toLowerCase())).map(drink => (
             <DrinkCard
