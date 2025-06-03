@@ -4,6 +4,7 @@ header h1 {
 
 header h3 {
     text-align: center;
+    margin: 0;
 }
 
 header img {
@@ -11,4 +12,11 @@ header img {
     max-height: 2em;
     margin-left: auto;
     margin-right: auto;
+}
+
+header {
+  background: linear-gradient(140deg, 
+  rgba(243,179,3,0.9), 
+  rgba(255,140,0,0.9), 
+  rgba(255, 129, 70, 0.9));
 }

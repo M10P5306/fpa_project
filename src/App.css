@@ -13,6 +13,16 @@
   }
 }
 
+.darker-navbar{
+  background-color: #aa5404c4;
+  color: white;
+  border-top: 1px solid #ffb347;
+  border-bottom: 1px solid #ffb347;
+  box-shadow: 
+    0 2px 5px 1px #ffb347,
+    0 -2px 5px 1px #ffb347;
+}
+
 .App-header {
   background-color: #282c34;
   min-height: 100vh;
@@ -27,6 +37,16 @@
 .App-link {
   color: #61dafb;
 }
+
+.content-container {
+  background-image: url('/public/beach3.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  min-height: 100vh;
+  padding: 1rem;
+}
+
 
 @keyframes App-logo-spin {
   from {

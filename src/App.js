@@ -27,7 +27,7 @@ function App() {
             <Header/>
             <Navbaren setDrink={setDrink} />
             <DrinkModal currentDrink={drink} onClose={closeModal} setFavoriteDrinks={setFavoriteDrinks}/>
-            <main>
+            <main className="content-container">
                 <Routes>
                     <Route path="/" element={<Navigate to="/favorites" replace />} />
                     <Route path="/favorites" element={<Favorites favoriteDrinks={favoriteDrinks} setFavoriteDrinks={setFavoriteDrinks} setDrink={setDrink}/>} />

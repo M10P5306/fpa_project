@@ -29,28 +29,34 @@ function SpinningWheel({ favoriteDrinks = [], setDrink }) {
     }, [favoriteDrinks]);
 
     return (
-        <>
-            {data.length > 0 ? (
-                <>
-                    <Wheel
-                        mustStartSpinning={mustSpin}
-                        prizeNumber={prizeNumber}
-                        data={data}
-                        backgroundColors={backGroundColors}
-                        textColors={['#000000']}
-                        onStopSpinning={() => {
-                            setMustSpin(false)
-                            setDrink(favoriteDrinks[prizeNumber])
-                        }}
-                    />
-                    <button onClick={winner} disabled={mustSpin} style={{ marginTop: 20 }}>
-                        Snurra hjulet!
-                    </button>
-                </>
-            ) : (
-                <p>🚫 Inga favoriter tillgängliga för snurrning.</p>
-            )}
-        </>
+            <div className="container mt-5">
+                {data.length > 0 ? (
+                    <div className="row justify-content-center text-center">
+                        <div className="col-auto">
+                            <Wheel
+                                mustStartSpinning={mustSpin}
+                                prizeNumber={prizeNumber}
+                                data={data}
+                                backgroundColors={backGroundColors}
+                                textColors={['#000000']}
+                                onStopSpinning={() => {
+                                    setMustSpin(false)
+                                    setDrink(favoriteDrinks[prizeNumber])
+                                }}
+                            />
+                            <button
+                                className="btn btn-warning btn-lg mt-4"
+                                onClick={winner}
+                                disabled={mustSpin}
+                            >
+                                Snurra hjulet!
+                            </button>
+                        </div>
+                    </div>
+                ) : (
+                    <p className="text-center">🚫 Inga favoriter tillgängliga för snurrning.</p>
+                )}
+            </div>
     )
 }
 
