@@ -1,0 +1,17 @@
+.bhdLno {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#wheel-field {
+    margin-left: auto;
+    margin-right: auto;
+    justify-content: center;
+    width: 80%;
+}
+
+#wheel-field button {
+    width: 50%;
+    min-width: 130px;
+    height: 3em;
+}
