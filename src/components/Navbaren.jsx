@@ -65,12 +65,12 @@ function NavScrollExample({setDrink}) {
             const response = await fetch(random_url);
             const data = await response.json();
             if (response.ok) {
-            setDrink(data.drinks[0] || []);
+                setDrink(data.drinks[0] || []);
             }
-} catch (error) {
-        console.log(error)
+        } catch (error) {
+            console.log(error)
+        }
     }
-}
 
     const handleClick = async (drink,e) => {
         e.preventDefault();
@@ -83,111 +83,72 @@ function NavScrollExample({setDrink}) {
         }
         else {
             setSearch("")
-                try {
+            try {
 
-                    const response = await fetch(drink_url + drink.strDrink);
-                    const data = await response.json();
-                    console.log(data.drinks[0])
-                    if (response.ok && data.drinks[0]) {
-                        setDrink(data.drinks[0])
-                    }
-                } catch (error) {
-                    console.log(error)
+                const response = await fetch(drink_url + drink.strDrink);
+                const data = await response.json();
+                console.log(data.drinks[0])
+                if (response.ok && data.drinks[0]) {
+                    setDrink(data.drinks[0])
                 }
+            } catch (error) {
+                console.log(error)
+            }
         }
     }
 
     return (
-            <Navbar expand="lg" className="darker-navbar">
+        <Navbar expand="lg" className="darker-navbar">
             <Container fluid>
                 <Navbar.Toggle aria-controls="navbarScroll" />
                 <Navbar.Collapse id="navbarScroll">
-                <div className="row w-100 align-items-center">
-                    <div className="col"></div>
-
-                    <div className="col d-flex justify-content-center">
-                    <Nav className="d-flex justify-content-evenly g-6" navbarScroll>
-                        <Nav.Link href="/favorites" className='nav-link-bordered mx-2'>Favorites</Nav.Link>
-                        <Nav.Link href="/Wheel" className='nav-link-bordered mx-2'>Spin the Wheel</Nav.Link>
-                        <Nav.Link href="#" className='nav-link-bordered mx-2' onClick={(e) => {
-                        e.preventDefault();
-                        getRandom();
-                        }}>
-                        I feel lucky!
-                        </Nav.Link>
-                    </Nav>
+                    <div className="navbar-row">
+                        <div className="col empty-col"></div>
+                        <div className="col nav-links-col">
+                            <Nav className="nav-links" navbarScroll>
+                                <Nav.Link href="/favorites" className="nav-button" >Favorites</Nav.Link>
+                                <Nav.Link href="/Wheel" className="nav-button">Spin the Wheel</Nav.Link>
+                                <Nav.Link href="#" className="nav-button" onClick={(e) => {
+                                    e.preventDefault();
+                                    getRandom();
+                                }}>
+                                    I feel lucky!</Nav.Link>
+                            </Nav>
+                        </div>
+                        <div className="col search-col">
+                            <Form className="search-form">
+                                <Form.Control
+                                    type="search"
+                                    placeholder="Search"
+                                    aria-label="Search"
+                                    value={search}
+                                    onChange={e => setSearch(e.target.value)}
+                                />
+                                {displayDropdown && results.length > 0 && (
+                                    <ListGroup className="dropdown-list">
+                                        {results.map(d => (
+                                            <ListGroup.Item key={d.idDrink} action onClick={e => handleClick(d, e)}>
+                                                {d.strDrink}
+                                            </ListGroup.Item>
+                                        ))}
+                                    </ListGroup>
+                                )}
+                            </Form>
+                            <div className="radio-group">
+                                <label>
+                                    <input type="radio" value="drink" checked={searchType === 'drink'} onChange={e => setSearchType(e.target.value)} />
+                                    Drink
+                                </label>
+                                <label>
+                                    <input type="radio" value="ingredient" checked={searchType === 'ingredient'} onChange={e => setSearchType(e.target.value)} />
+                                    Ingredient
+                                </label>
+                            </div>
+                        </div>
                     </div>
-
-                    <div className="col d-flex justify-content-end align-items-center gap-3">
-                    <Form className="d-flex position-relative">
-                        <Form.Control
-                        type="search"
-                        placeholder="Search"
-                        className="me-2"
-                        aria-label="Search"
-                        value={search}
-                        onChange={e => setSearch(e.target.value)}
-                        />
-
-                        {displayDropdown && results.length > 0 && (
-                        <ListGroup
-                            style={{
-                            position: 'absolute',
-                            top: '100%',
-                            zIndex: 1000,
-                            width: '100%',
-                            maxHeight: '300px',
-                            overflowY: 'auto',
-                            overflowX: 'hidden',
-                            }}
-                        >
-                            {results.map((drink) => (
-                            <ListGroup.Item
-                                key={drink.idDrink}
-                                action
-                                onClick={(e) => handleClick(drink, e)}
-                            >
-                                {drink.strDrink}
-                            </ListGroup.Item>
-                            ))}
-                        </ListGroup>
-                        )}
-                    </Form>
-
-                    <div className="form-check mb-0">
-                        <input
-                        className="form-check-input"
-                        type="radio"
-                        name="flexRadio"
-                        id="flexRadioDefault1"
-                        value="drink"
-                        checked={searchType === "drink"}
-                        onChange={(e) => setSearchType(e.target.value)}
-                        />
-                        <label className="form-check-label" htmlFor="flexRadioDefault1">
-                        Drink
-                        </label>
-                    </div>
-
-                    <div className="form-check mb-0">
-                        <input
-                        className="form-check-input"
-                        type="radio"
-                        name="flexRadio"
-                        id="flexRadioDefault2"
-                        value="ingredient"
-                        checked={searchType === "ingredient"}
-                        onChange={(e) => setSearchType(e.target.value)}
-                        />
-                        <label className="form-check-label" htmlFor="flexRadioDefault2">
-                        Ingredient
-                        </label>
-                    </div>
-                    </div>
-                </div>
                 </Navbar.Collapse>
             </Container>
-            </Navbar>
+        </Navbar>
     );
 }
 
