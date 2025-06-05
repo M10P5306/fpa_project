@@ -1,4 +1,5 @@
 .drinkModal {
+
     .modal-content {
         background-color: #fff1db;
     }
@@ -37,13 +38,12 @@
 
 @media (max-width: 992px) {
     .modal-footer {
+        margin: 0;
         display: flex;
-        justify-content: space-between;
+        justify-content: center !important;
         gap: 10px;
         Button {
-            width: 40%;
             margin: 0;
-
         }
     }
 
