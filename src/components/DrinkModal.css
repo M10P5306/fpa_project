@@ -1,4 +1,8 @@
 .drinkModal {
+    .modal-content {
+        background-color: #fff1db;
+    }
+
     ul {
         list-style: none;
         text-align: center;
