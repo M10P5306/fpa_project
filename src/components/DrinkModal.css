@@ -35,3 +35,16 @@
   cursor: not-allowed;
 }
 
+@media (max-width: 992px) {
+    .modal-footer {
+        display: flex;
+        justify-content: space-between;
+        gap: 10px;
+        Button {
+            width: 40%;
+            margin: 0;
+
+        }
+    }
+
+}
